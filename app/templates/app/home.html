@@ -1,0 +1,107 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block banner_slider %}
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+	  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+	  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+	  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	</div> 
+	<div class="carousel-inner">
+	  <div class="carousel-item active" data-bs-interval="1500">
+		<img src="{% static 'app/images/banner/banner2.jpg' %}" class="d-block w-100" alt="anh1" height="500">
+	  </div>
+	  <div class="carousel-item" data-bs-interval="1500">
+		<img src="{% static 'app/images/banner/banner1.png' %}" class="d-block w-100" alt="anh2" height="500">
+	  </div>
+	  <div class="carousel-item" data-bs-interval="1500">
+		<img src="{% static 'app/images/banner/banner3.jpg' %}" class="d-block w-100" alt="anh 3" height="500">
+		<div class="carousel-caption d-none d-md-block">
+	  </div>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+	  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	  <span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+	  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	  <span class="visually-hidden">Next</span>
+	</button>
+  </div>
+</div>
+{% endblock banner_slider%}
+
+{% block content %}
+<section style="background-color: #eee;">
+  <div class="container py-5">
+{% for item in products %}
+
+    <div class="row justify-content-center mb-3">
+      <div class="col-md-12 col-xl-10">
+        <div class="card shadow-0 border rounded-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                  <img src="{{item.productImage.url}}"
+                    class="w-100" />
+                  <a href="#!">
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6 col-xl-6">
+                <h5>{{item.productName}}</h5>
+                <div class="d-flex flex-row">
+                  <div class="text-danger mb-1 me-2">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </div>
+                  <span>310</span>
+                </div>
+                <div class="mt-1 mb-0 text-muted small">
+                  <span>100% cotton</span>
+                  <span class="text-primary"> • </span>
+                  <span>Light weight</span>
+                  <span class="text-primary"> • </span>
+                  <span>Best finish<br /></span>
+                </div>
+                <div class="mb-2 text-muted small">
+                  <span>Unique design</span>
+                  <span class="text-primary"> • </span>
+                  <span>For men</span>
+                  <span class="text-primary"> • </span>
+                  <span>Casual<br /></span>
+                </div>
+                <p class="text-truncate mb-4 mb-md-0">
+                  There are many variations of passages of Lorem Ipsum available, but the
+                  majority have suffered alteration in some form, by injected humour, or
+                  randomised words which don't look even slightly believable.
+                </p>
+              </div>
+              <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                <div class="d-flex flex-row align-items-center mb-1">
+                  <h4 class="mb-1 me-1">${{item.price | floatformat:2}}</h4>
+                </div>
+                <h6 class="text-success">Free shipping</h6>
+                <div class="d-flex flex-column mt-4">
+                  <a class="btn btn-primary btn-sm" href="{% url "app:detail" %}?id={{item.id}}">Details</a>
+                  <button data-product={{item.id}} data-action = "add" class="btn btn-outline-primary btn-sm mt-2 add-btn update-cart">
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+{% endfor %}
+</div>
+</section>
+{% endblock content %}
